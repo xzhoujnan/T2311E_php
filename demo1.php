@@ -1,4 +1,3 @@
-
 <?php
 $arr = []; // array
 $arr[] = 5;

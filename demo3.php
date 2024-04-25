@@ -69,6 +69,8 @@
           <td><?php echo $item["description"];?></td>
           <td><?php echo $item["qty"];?></td>
           <td><a href="/edit_product.php?id=<?php echo $item["id"];?>">Edit</a></td>
+          <td><a onclick="return confirm('Are u sure want to delete this product ?')" 
+              class="text-danger" href="/delete_product.php?id=<?php echo $item["id"];?>">Delete</a></td>
         </tr>
         <?php endforeach;?>
       </tbody>
