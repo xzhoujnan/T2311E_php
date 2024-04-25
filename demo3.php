@@ -1,4 +1,27 @@
+<?php
+  //query to db
+  //1.connect db
+  $host = "localhost";
+  $user = "root";
+  $pass = "root";
+  $db = "t2311e_php";
 
+  $conn = new mysqli($host,$user,$pass,$db);
+  if($conn->connect_error){
+    die("Connect Database Failed");
+  }
+  //2. query SQL
+    //2.1 lấy tham số
+    $limit = isset($_GET["limit"]) && $_GET["limit"]!= "" ?$_GET["limit"]:20;
+    $search = isset($_GET["search"])?$_GET["search"]:"";
+    //2.2 áp dụng giá trị tham số vào truy vấn
+    $sql="SELECT * FROM products WHERE name like '%$search%' LIMIT $limit";
+  $result = $conn->query($sql);
+  $list =[];
+  while($row = $result->fetch_assoc()){
+    $list[]=$row;
+  };
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,54 +29,49 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </head>
 <body>
-    <?php
-        $list = [
-            [
-                "name"=>"Iphone 15",
-                "price"=>1000,
-                "description"=>"San pham dang hot"
-            ],
-            [
-                "name"=>"Iphone 15",
-                "price"=>1000,
-                "description"=>"San pham dang hot"
-            ]
-        ];
-    ?>
-    <div class="container">
+  <div class="container">
+    <form action="/demo3.php" method="GET">
+      <div class="row">
+        <div class="col">
+          <input value="<?php echo $search; ?>" name="search" placeholder="Search" type="text" class="form-control"/>
+        </div>
+        <div class="col">
+          <input value="<?php echo $limit; ?>" name="limit" placeholder="Limit" type="number" class="form-control"/>
+        </div>
+        <div class="col">
+          <button type="submit" class="btn btn-primary">Submit</button>
+        </div>
+      </div>
+    </form>
+  </div>
+
+  <div class="container">
+    <a href="/create_product.php">Create a new products</a>   
     <table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">First</th>
-      <th scope="col">Last</th>
-      <th scope="col">Handle</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th scope="row">1</th>
-      <td>Mark</td>
-      <td>Otto</td>
-      <td>@mdo</td>
-    </tr>
-    <tr>
-      <th scope="row">2</th>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-    </tr>
-    <tr>
-      <th scope="row">3</th>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-    </tr>
-  </tbody>
-</table>
-    </div>
+      <thead>
+        <tr>
+          <th scope="col">#</th>
+          <th scope="col">Name</th>
+          <th scope="col">Price</th>
+          <th scope="col">Description</th>
+          <th scope="col">Qty</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach($list as $item):?>
+        <tr>
+          <th scope="row"><?php echo $item["id"];?></th>
+          <td><?php echo $item["name"];?></td>
+          <td><?php echo $item["price"];?></td>
+          <td><?php echo $item["description"];?></td>
+          <td><?php echo $item["qty"];?></td>
+        </tr>
+        <?php endforeach;?>
+      </tbody>
+    </table>
+  </div>
 </body>
 </html>
