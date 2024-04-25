@@ -68,6 +68,7 @@
           <td><?php echo $item["price"];?></td>
           <td><?php echo $item["description"];?></td>
           <td><?php echo $item["qty"];?></td>
+          <td><a href="/edit_product.php">Edit</a></td>
         </tr>
         <?php endforeach;?>
       </tbody>
