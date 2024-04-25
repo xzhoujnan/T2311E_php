@@ -1,3 +1,29 @@
+<?php
+    // code de lay data tu database cho vao form de update
+    $id = $_GET["id"];
+
+    $host = "localhost";
+    $user = "root";
+    $pass = "root";
+    $db = "t2311e_php";
+
+    $conn = new mysqli($host,$user,$pass,$db);
+    if($conn->connect_error){
+    die("Connect Database Failed");
+    }
+
+    $sql="SELECT * FROM products WHERE id=$id";
+    $result = $conn->query($sql);
+    $product = null;
+    while($row = $result->fetch_assoc()){
+        $product = $row;
+    }
+    if($product == null){
+        header("Location:/notfound.php");
+        return;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,22 +36,23 @@
 <body>
     <div class="container">
         <h1>Edit Product</h1>
-        <form action="/save_product.php" method="post">
+        <form action="/update_product.php?id=<?php echo $id;?>" method="post">
             <div class="mb-3">
                 <label class="form-label">Name</label>
-                <input type="text" class="form-control" name="name">
+                <input value="<?php echo $product["name"]?>" type="text" class="form-control" name="name">
             </div>
             <div class="mb-3">
                 <label class="form-label">Price</label>
-                <input type="number" class="form-control" name="price">
+                <input value="<?php echo $product["price"]?>" type="number" class="form-control" name="price">
             </div>
             <div class="mb-3">
                 <label class="form-label">Qty</label>
-                <input type="number" class="form-control" name="qty">
+                <input value="<?php echo $product["qty"]?>" type="number" class="form-control" name="qty">
             </div>
             <div class="mb-3">
                 <label class="form-label">Description</label>
-                <input type="text" class="form-control" name="description">
+                <textarea name="description" class="form-control" value="<?php echo $product["qty"]?>">
+                </textarea>
             </div>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
