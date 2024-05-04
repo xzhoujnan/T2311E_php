@@ -1,4 +1,3 @@
-
 <?php 
 require_once("database.php");
 function newest_products(){
@@ -56,4 +55,13 @@ function category_detail($category_id){
     }
     return null;
     
+}
+
+function product_detail($product_id){
+    $sql = "select * from products where id = $product_id";
+    $result = query($sql);
+    if($result->num_rows > 0){
+        return $result->fetch_assoc();// 1 product
+    }
+    return null;
 }
