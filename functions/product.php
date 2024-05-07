@@ -57,7 +57,7 @@ function category_detail($category_id){
     
 }
 
-function product_detail($product_id){
+function product_detail($product_id)  {
     $sql = "select * from products where id = $product_id";
     $result = query($sql);
     if($result->num_rows > 0){

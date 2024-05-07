@@ -32,6 +32,7 @@
                 <?php endif;?>
             </form>
         </div>
+    
     </main>
 </body>
 </html>

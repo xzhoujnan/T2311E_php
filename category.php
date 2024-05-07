@@ -20,7 +20,7 @@
         <div class="container">
             <h2><?php echo $category["name"];?></h2>
             <div class="row">
-            <div class="row">
+           
                 <?php foreach($category["products"] as $item):?>
                     <div class="col-3">
                         <div class="card" style="width: 18rem;">
@@ -34,7 +34,7 @@
                         </div>
                     </div>
                 <?php endforeach;?>    
-            </div>
+        
             </div>
         </div>
     
