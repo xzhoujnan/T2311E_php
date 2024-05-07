@@ -1,5 +1,5 @@
+<?php
 
-<?php 
 session_start();// open session
 // add product to cart
 $cart  = isset($_SESSION["cart"]) ? $_SESSION["cart"] : [];

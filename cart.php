@@ -36,7 +36,7 @@
                             <td><?php echo $cart[$item["id"]] ?></td>
                             <td><?php echo $item["price"] * $cart[$item["id"]] ?></td>
                         </tr>
-                    <?php endforeach;?>    
+                    <?php endforeach;?>
                 </tbody>
                 <tfoot>
                     <tr>
