@@ -38,4 +38,11 @@ $order_info = [
     "shipping_method" => $shipping_method,
     "payment_method" => $payment_method
 ];
+//create order
 order_create($order_info,$products,$cart);
+
+//paypal
+
+//email
+
+//clear cart
