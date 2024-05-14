@@ -35,4 +35,4 @@ function updateStatusPaid($order_id){
 function updateStatusUnPaid($order_id){
     $sql = "update orders SET status = 'PAYMENT_FAIL' where id = $order_id";
     query($sql);
-}
+}   
